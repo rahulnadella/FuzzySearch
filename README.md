@@ -7,7 +7,10 @@ The FuzzySearch project provides a utility class to find an approximate match fo
 
 Usage
 -------------------------------
-let message:String = "Swift is a new programming language for iOS and OS X apps that builds on the best of C and Objective-C, without the constraints of C compatibility."
+    By importing the file -> FuzzySearch.swift into your project you be able to execute the methods within the class.
+    
+        
+    let message:String = "Swift is a new programming language for iOS and OS X apps that builds on the best of C                                 and Objective-C, without the constraints of C compatibility."
 
 ***CASE-INSENSITIVE***
 
