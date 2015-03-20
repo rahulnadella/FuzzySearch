@@ -3,7 +3,7 @@
 Concept
 ==============================
 
-The FuzzySearch project provides a utility class to find an approximate match for a specific character set.
+The FuzzySearch project provides a utility class to find an approximate match for a specific character set. (Future implementations will be added to scrutinize the closeness of the match.) 
 
 Usage
 -------------------------------
