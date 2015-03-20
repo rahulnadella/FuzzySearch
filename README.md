@@ -11,8 +11,8 @@ let message:String = "Swift is a new programming language for iOS and OS X apps 
 
 ***CASE-INSENSITIVE***
 
-FuzzySearch().search(message, stringToSearch:"Swift")
+    FuzzySearch().search(message, stringToSearch:"Swift")
 
 ***CASE-SENSITIVE***
 
-FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:true)
+    FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:true)
