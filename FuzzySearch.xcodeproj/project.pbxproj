@@ -6,10 +6,17 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		FC0048C81ABBACCB0071661F /* FuzzySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzySearch.swift; sourceTree = "<group>"; };
+		FC0048C91ABBB0110071661F /* FuzzySearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzySearchTest.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		FC0048C11ABBACAB0071661F = {
 			isa = PBXGroup;
 			children = (
+				FC0048C81ABBACCB0071661F /* FuzzySearch.swift */,
+				FC0048C91ABBB0110071661F /* FuzzySearchTest.swift */,
 			);
 			sourceTree = "<group>";
 		};
