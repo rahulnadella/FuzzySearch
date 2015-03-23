@@ -13,8 +13,9 @@ By importing the file -> FuzzySearch.swift into your project you be able to exec
 
 ***CASE-INSENSITIVE***
 
-    FuzzySearch().search(message, stringToSearch:"Swift")
+    FuzzySearch().search(message, stringToSearch:"Swift") -> true
 
 ***CASE-SENSITIVE***
 
-    FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:true)
+    FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:false) -> false
+    FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:true) -> true
