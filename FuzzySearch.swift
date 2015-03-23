@@ -50,6 +50,22 @@ public class FuzzySearch
     }
     
     /*
+    The FuzzySearch.search method returns the number of timees found (Integer) of the 
+    set of characters to be searched within the original character set.
+    
+    @param originalString
+            The original contents that is going to be searched
+    @param stringToSearch
+            The specific contents to search for
+    @return
+            A Boolean of TRUE if found otherwise FALSE for not found
+    */
+    public func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Int
+    {
+        return search(originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
+    }
+    
+    /*
     The FuzzySearch.search method returns a Boolean of TRUE if the stringToSearch for
     is found in the originalString otherwise FALSE. This search does search for case sensitive 
     Strings by using a Boolean value to indicate what kind of search to use.

@@ -55,8 +55,6 @@ class FuzzySearchTest: XCTestCase {
     {
         let helloWorld:String = "Hello World!"
         
-        FuzzySearch().search("", stringToSearch: "")
-        
         XCTAssertTrue(fuzzySearch.search(helloWorld, stringToSearch: "Hello World!"), "Fuzzy Search 'Hello World!' returns TRUE")
         XCTAssertTrue(fuzzySearch.search(helloWorld, stringToSearch: "Hello"), "Fuzzy Search 'Hello' returns TRUE")
         XCTAssertTrue(fuzzySearch.search(helloWorld, stringToSearch: "World!"), "Fuzzy Search 'World!' returns TRUE")
@@ -67,6 +65,18 @@ class FuzzySearchTest: XCTestCase {
         XCTAssertFalse(fuzzySearch.search(helloWorld, stringToSearch: "ld?"), "Fuzzy Search 'ld?' returns FALSE")
         XCTAssertTrue(fuzzySearch.search(helloWorld, stringToSearch: "HELLO", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'HELLO' returns TRUE")
         XCTAssertFalse(fuzzySearch.search(helloWorld, stringToSearch: "HELLO", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'HELLO' returns FALSE")
+    }
+    
+    /*
+    The testFuzzySearchCountWithoutCaseSensitive method tests the implementation of the FuzzySearch.search which returns count the number of characters which exist within the original character set
+    */
+    func testFuzzySearchCountWithouCaseSensitive()
+    {
+        let countMessage = "si s S S s si"
+        
+        XCTAssertEqual(fuzzySearch.search(countMessage, stringToSearch: "s"), 4)
+        XCTAssertEqual(fuzzySearch.search(countMessage, stringToSearch: "S"), 2)
+        XCTAssertEqual(fuzzySearch.search(countMessage, stringToSearch: "s", isCaseSensitive: true), 6)
     }
     
     /*
@@ -113,6 +123,8 @@ class FuzzySearchTest: XCTestCase {
             self.testFuzzySearch()
             /* Test with case sensitive */
             self.testFuzzySearchWithCaseSensitive()
+            /* Test count without case sensitive */
+            self.testFuzzySearchCountWithouCaseSensitive()
             /* Test with count */
             self.testFuzzySearchCount();
         }
