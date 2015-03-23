@@ -29,7 +29,7 @@ matches inside a given string and finding dictionarystrings that match the
 pattern approximately.
 
 The FuzzySearch provides an implementation to search and match a pattern approximately
-will return TRUE otherwise FALSE.
+will return whether the character set is found or not by a Boolean or Integer value.
 */
 public class FuzzySearch
 {
