@@ -20,11 +20,11 @@ By importing the file -> FuzzySearch.swift into your project you be able to exec
     FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:false) -> false
     FuzzySearch().search(message, stringToSearch:"SWIFT", isCaseSensitive:true) -> true
     
-****CASE-INSENSITIVE (COUNT)***
+***CASE-INSENSITIVE (COUNT)***
 
     FuzzySearch().search(message, stringToSearch:"the") -> 2
     
-****CASE-SENSITIVE (COUNT)***
+***CASE-SENSITIVE (COUNT)***
 
     FuzzySearch().search(message, stringToSearch:"THE", isCaseInsensitive:false) -> 0
     FuzzySearch().search(message, stringToSearch:"THE", isCaseInsensitive:true) -> 2
