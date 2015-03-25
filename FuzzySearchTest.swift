@@ -110,6 +110,21 @@ class FuzzySearchTest: XCTestCase {
         XCTAssertEqual(fuzzySearch.search(testMessage, stringToSearch: "THE", isCaseSensitive: false), 0)
         XCTAssertEqual(fuzzySearch.search(testMessage, stringToSearch: "T", isCaseSensitive: false), 2)
     }
+    /*
+    The testFuzzySearchArray method tests the implementation of the FuzzySearch.search that returns an Array of Strings that match the character set being searched.
+    */
+    func testFuzzySearchArray()
+    {
+        let message:String = "This document specifies an Internet standards track protocol aN"
+        let messageUppercase:String = message.uppercaseString
+        
+        XCTAssertEqual(fuzzySearch.search("", stringToSearch: "", isCaseSensitive: false), [String]())
+        XCTAssertEqual(fuzzySearch.search("", stringToSearch: message, isCaseSensitive: false), [String]())
+        XCTAssertEqual(fuzzySearch.search(message, stringToSearch: "an", isCaseSensitive: true), ["an", "standards", "an"])
+        XCTAssertEqual(fuzzySearch.search(messageUppercase, stringToSearch: "an", isCaseSensitive: false), [String]())
+        XCTAssertEqual(fuzzySearch.search(message, stringToSearch: "aN", isCaseSensitive: true), ["an", "standards", "an"])
+        XCTAssertEqual(fuzzySearch.search(message, stringToSearch: "aN", isCaseSensitive: false), ["aN"])
+    }
     
     /*
     The testPerformanceExample tests the performance of FuzzySearch.search
@@ -126,7 +141,9 @@ class FuzzySearchTest: XCTestCase {
             /* Test count without case sensitive */
             self.testFuzzySearchCountWithouCaseSensitive()
             /* Test with count */
-            self.testFuzzySearchCount();
+            self.testFuzzySearchCount()
+            /* Test with array of Strings */
+            self.testFuzzySearchArray()
         }
     }
 

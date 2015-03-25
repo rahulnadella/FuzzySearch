@@ -106,7 +106,7 @@ public class FuzzySearch
             A Boolean value to indicate whether to use case sensitive or case
             insensitive search parameters
     @return
-            A Boolean of TRUE if found otherwise FALSE for not found
+            An Integer value of the number of instances a character set matches a String
     */
     public func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
     {
@@ -137,7 +137,7 @@ public class FuzzySearch
         */
         if countElements(tempOriginalString) < countElements(tempStringToSearch)
         {
-            return 0;
+            return 0
         }
         
         /*
@@ -145,8 +145,8 @@ public class FuzzySearch
         */
         if isCaseSensitive
         {
-            tempOriginalString = tempOriginalString.lowercaseString;
-            tempStringToSearch = tempStringToSearch.lowercaseString;
+            tempOriginalString = tempOriginalString.lowercaseString
+            tempStringToSearch = tempStringToSearch.lowercaseString
         }
         
         var searchIndex : Int = 0
@@ -180,6 +180,86 @@ public class FuzzySearch
                 }
             }
         }
-        return searchCount;
+        return searchCount
+    }
+    
+    /*
+    The FuzzySearch.search method returns the Array of String(s) a specific character
+    approximately matches that String object
+    
+    @param originalString
+            The original contents that is going to be searched
+    @param stringToSearch
+            The specific contents to search for
+    @param isCaseSensitive
+            A Boolean value to indicate whether to use case sensitive or case
+            insensitive search parameters
+    @return
+           The Array of String(s) if any are found otherwise an empty Array of String(s)
+    */
+
+    public func search(var originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
+    {
+        
+        /*
+        Either String is empty return false
+        */
+        if countElements(originalString) == 0 || countElements(stringToSearch) == 0
+        {
+            return [String]()
+        }
+        
+        /*
+        stringToSearch is greater than the originalString return false
+        */
+        if countElements(originalString) < countElements(stringToSearch)
+        {
+            return [String]()
+        }
+        
+        /*
+        Check isCaseSensitive if true lowercase the contents of both strings
+        */
+        if isCaseSensitive
+        {
+            originalString = originalString.lowercaseString
+            stringToSearch = stringToSearch.lowercaseString
+        }
+        
+        var searchIndex : Int = 0
+        var approximateMatch:Array = [String]()
+        /*
+        Search the contents of the originalString to determine if the stringToSearch can be found or not
+        */
+        for content in originalString.componentsSeparatedByString(" ")
+        {
+            for charOut in content
+            {
+                for (indexIn, charIn) in enumerate(stringToSearch)
+                {
+                    if indexIn == searchIndex
+                    {
+                        if charOut==charIn
+                        {
+                            searchIndex++
+                            if searchIndex==countElements(stringToSearch)
+                            {
+                                approximateMatch.append(content)
+                                searchIndex = 0
+                            }
+                            else
+                            {
+                                break
+                            }
+                        }
+                        else
+                        {
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        return approximateMatch
     }
 }
