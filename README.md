@@ -3,7 +3,9 @@
 Introduction
 ------------------------------
 
-The FuzzySearch project provides a utility class to find an approximate match for a specific character set. (Future implementations will be added to scrutinize the closeness of the match.) 
+The FuzzySearch project provides a utility class to find an approximate match for a specific character set by either returning whether a match is found (true/false), the number of matches that exist (Int), or the approximate matches found in the search context ([String]). 
+
+(Future implementations will be added to scrutinize the closeness of each match.) 
 
 Usage
 ------------------------------
