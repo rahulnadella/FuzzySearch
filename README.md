@@ -30,5 +30,10 @@ By importing the file -> FuzzySearch.swift into your project you be able to exec
     
 ***CASE-SENSITIVE (COUNT)***
 
-    FuzzySearch().search(message, stringToSearch:"THE", isCaseInsensitive:false) -> 0
-    FuzzySearch().search(message, stringToSearch:"THE", isCaseInsensitive:true) -> 2
+    FuzzySearch().search(message, stringToSearch:"THE", isCaseSensitive:false) -> 0
+    FuzzySearch().search(message, stringToSearch:"THE", isCaseSensitive:true) -> 2
+
+***CASE-INSENSITIVE (ARRAY)***
+    
+    FuzzySearch().search(message, stringToSearch"C", isCaseSensitive:false) -> ["C", "Objective-C", "C"]
+    
