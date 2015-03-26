@@ -44,7 +44,7 @@ public class FuzzySearch
     @return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Bool
+    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Bool
     {
         return search(originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
@@ -60,7 +60,7 @@ public class FuzzySearch
     @return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Int
+    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Int
     {
         return search(originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
@@ -80,7 +80,7 @@ public class FuzzySearch
     @return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Bool
+    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Bool
     {
         /* Decipher if the String to be searched for is found */
         var searchCount:Int = search(originalString, stringToSearch: stringToSearch, isCaseSensitive: isCaseSensitive)
@@ -94,6 +94,7 @@ public class FuzzySearch
             return false
         }
     }
+    
     /*
     The FuzzySearch.search method returns the number of instances a specific character 
     set is found with in a String object
@@ -108,7 +109,7 @@ public class FuzzySearch
     @return
             An Integer value of the number of instances a character set matches a String
     */
-    public func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
+    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
     {
         var tempOriginalString = String()
         var tempStringToSearch = String()
@@ -198,9 +199,8 @@ public class FuzzySearch
            The Array of String(s) if any are found otherwise an empty Array of String(s)
     */
 
-    public func search(var originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
+    public class func search(var originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
     {
-        
         /*
         Either String is empty return false
         */
@@ -261,5 +261,141 @@ public class FuzzySearch
             }
         }
         return approximateMatch
+    }
+    
+    /*
+    The score method that provides fast fuzzy string matching and scoring based 
+    on the technique of finding strings that match a pattern approximately 
+    (rather than exactly). The problem of approximate string matching is typically
+    dived intotwo sub-problems: finding approximate substring matches inside 
+    a given string and finding dictionary strings that match the pattern approximately.
+    
+    The design and implementation of this method are based on 
+    StringScore in Swift (Yichi Zhang) and StringScore in Javascript (Joshaven Potter)
+    
+    @param originalString
+            The original contents that is going to be searched
+    @param stringToMatch
+            The specific contents to search for the approximate match
+    @param fuzziness
+            A Double value to indicate a function of distance between two words, 
+            which provides a measure of their similarity. The fuzziness value is
+            defaulted to 0.
+    @return The score value of the approximate match between strings. 
+            Score of 0 for no match; up to 1 for perfect.
+    
+    */
+    public class func score(#originalString: String, stringToMatch: String, fuzziness: Double? = nil) -> Double
+    {
+        /*
+        Either String objects are empty return score of 0
+        */
+        if originalString.isEmpty || stringToMatch.isEmpty
+        {
+            return 0
+        }
+        /*
+        the stringToMatch is greater than originalString return score of 0
+        */
+        if countElements(originalString) < countElements(stringToMatch)
+        {
+            return 0
+        }
+        
+        /*
+        Either String objects are the same return score of 1
+        */
+        if originalString == stringToMatch
+        {
+            return 1
+        }
+        
+        /* Initialization of the local variables */
+        var runningScore = 0.0
+        var charScore = 0.0
+        var finalScore = 0.0
+        var lowercaseString = originalString.lowercaseString
+        var strLength = countElements(originalString)
+        var lowercaseStringToMatch = stringToMatch.lowercaseString
+        var wordLength = countElements(stringToMatch)
+        var indexOfString:String.Index!
+        var startAt = lowercaseString.startIndex
+        var fuzzies = 1.0
+        var fuzzyFactor = 0.0
+        var fuzzinessIsNil = true
+        
+        /* Cache fuzzyFactor for speed increase */
+        if let fuzziness = fuzziness
+        {
+            fuzzyFactor = 1 - fuzziness
+            fuzzinessIsNil = false
+        }
+        
+        for i in 0..<wordLength
+        {
+            /*
+            Find next first case-insensitive match of word's i-th character.
+            The search in "string" begins at "startAt".
+            */
+            if let range = lowercaseString.rangeOfString(
+                String(lowercaseStringToMatch[advance(lowercaseStringToMatch.startIndex, i)] as Character),
+                options: nil,
+                range: Range<String.Index>( start: startAt, end: lowercaseString.endIndex),
+                locale: nil
+                )
+            {
+                    /* start index of word's i-th character in string. */
+                    indexOfString = range.startIndex
+                    if startAt == indexOfString
+                    {
+                        /* Consecutive letter & start-of-string Bonus */
+                        charScore = 0.7
+                    }
+                    else
+                    {
+                        charScore = 0.1
+                        /*
+                        Acronym Bonus
+                        Weighing Logic: Typing the first character of an acronym is as if you
+                        preceded it with two perfect character matches.
+                        */
+                        if originalString[advance(indexOfString, -1)] == " " { charScore += 0.8 }
+                    }
+            }
+            else
+            {
+                /* Character not found. */
+                if fuzzinessIsNil
+                {
+                    // Fuzziness is nil. Return 0.
+                    return 0
+                }
+                else
+                {
+                    fuzzies += fuzzyFactor
+                    continue
+                }
+            }
+            
+            /* Same case bonus. */
+            if (originalString[indexOfString] == stringToMatch[advance(stringToMatch.startIndex, i)])
+            {
+                charScore += 0.1
+            }
+            
+            /* Update scores and startAt position for next round of indexOf */
+            runningScore += charScore
+            startAt = advance(indexOfString, 1)
+        }
+        
+        /* Reduce penalty for longer strings. */
+        finalScore = 0.5 * (runningScore / Double(strLength) + runningScore / Double(wordLength)) / fuzzies
+        
+        if (lowercaseString[lowercaseString.startIndex] == lowercaseString[lowercaseString.startIndex]) && (finalScore < 0.85)
+        {
+            finalScore += 0.15
+        }
+        
+        return finalScore
     }
 }
