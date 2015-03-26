@@ -7,7 +7,7 @@ The FuzzySearch project provides a utility class to find an approximate match fo
 
 Usage
 ------------------------------
-By importing the file -> FuzzySearch.swift into your project you be able to execute the methods within the class.
+By importing the file -> FuzzySearch.swift into your project you be able to execute the methods within your the specific project. Examples are below of the listed functions within the class. Please refer to FuzzySearchTest.swift for examples.
 
 ***Initialization***
 
