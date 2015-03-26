@@ -37,4 +37,7 @@ By importing the file -> FuzzySearch.swift into your project you be able to exec
     
 ***SCORE***
 
-    
+    FuzzySearch.search(originalString: message, stringToMatch: message) -> 1.0
+    FuzzySearch.search(originalString: message, stringToMatch: "acx") -> 0.0
+    FuzzySearch.search(originalString: "hello world", stringToMatch: "hello", fuzzines: 0.5) -> 0.913636363636364
+    FuzzySearch.search(originalString: "hello world", stringToMatch: "hello wor1", fuzziness: 0.5) -> 0.608181818181818
