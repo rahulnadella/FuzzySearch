@@ -15,25 +15,25 @@ By importing the file -> FuzzySearch.swift into your project you be able to exec
 
 ***CASE-INSENSITIVE***
 
-    FuzzySearch.search(message, stringToSearch:"Swift") -> true
+    FuzzySearch.search(originalString: message, stringToSearch:"Swift") -> true
 
 ***CASE-SENSITIVE***
 
-    FuzzySearch.search(message, stringToSearch:"SWIFT", isCaseSensitive:false) -> false
-    FuzzySearch.search(message, stringToSearch:"SWIFT", isCaseSensitive:true) -> true
+    FuzzySearch.search(originalString: message, stringToSearch:"SWIFT", isCaseSensitive:false) -> false
+    FuzzySearch.search(originalString: message, stringToSearch:"SWIFT", isCaseSensitive:true) -> true
     
 ***CASE-INSENSITIVE (COUNT)***
 
-    FuzzySearch.search(message, stringToSearch:"the") -> 2
+    FuzzySearch.search(originalString: message, stringToSearch:"the") -> 2
     
 ***CASE-SENSITIVE (COUNT)***
 
-    FuzzySearch.search(message, stringToSearch:"THE", isCaseSensitive:false) -> 0
-    FuzzySearch.search(message, stringToSearch:"THE", isCaseSensitive:true) -> 2
+    FuzzySearch.search(originalString: message, stringToSearch:"THE", isCaseSensitive:false) -> 0
+    FuzzySearch.search(originalString: message, stringToSearch:"THE", isCaseSensitive:true) -> 2
 
 ***CASE-INSENSITIVE (ARRAY)***
 
-    FuzzySearch.search(message, stringToSearch"C", isCaseSensitive:false) -> ["C", "Objective-C", "C"]
+    FuzzySearch.search(originalString: message, stringToSearch"C", isCaseSensitive:false) -> ["C", "Objective-C", "C"]
     
 ***SCORE***
 
