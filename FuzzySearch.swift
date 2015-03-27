@@ -44,9 +44,9 @@ public class FuzzySearch
     @return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Bool
+    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T) -> Bool
     {
-        return search(originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
+        return search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
     
     /*
@@ -60,9 +60,9 @@ public class FuzzySearch
     @return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T) -> Int
+    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T) -> Int
     {
-        return search(originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
+        return search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
     
     /*
@@ -80,10 +80,10 @@ public class FuzzySearch
     @return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Bool
+    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Bool
     {
         /* Decipher if the String to be searched for is found */
-        var searchCount:Int = search(originalString, stringToSearch: stringToSearch, isCaseSensitive: isCaseSensitive)
+        var searchCount:Int = search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: isCaseSensitive)
         
         if searchCount > 0
         {
@@ -109,7 +109,7 @@ public class FuzzySearch
     @return
             An Integer value of the number of instances a character set matches a String
     */
-    public class func search<T : Equatable>(var originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
+    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
     {
         var tempOriginalString = String()
         var tempStringToSearch = String()
@@ -199,7 +199,7 @@ public class FuzzySearch
            The Array of String(s) if any are found otherwise an empty Array of String(s)
     */
 
-    public class func search(var originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
+    public class func search(var #originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
     {
         /*
         Either String is empty return false
@@ -271,7 +271,7 @@ public class FuzzySearch
     a given string and finding dictionary strings that match the pattern approximately.
     
     The design and implementation of this method are based on 
-    StringScore in Swift (Yichi Zhang) and StringScore in Javascript (Joshaven Potter)
+    StringScore_Swift by (Yichi Zhang) and StringScore in Javascript (Joshaven Potter)
     
     @param originalString
             The original contents that is going to be searched

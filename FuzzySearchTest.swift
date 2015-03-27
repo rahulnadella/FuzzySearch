@@ -52,16 +52,16 @@ class FuzzySearchTest: XCTestCase
     {
         let helloWorld:String = "Hello World!"
         
-        XCTAssertTrue(FuzzySearch.search(helloWorld, stringToSearch: "Hello World!"), "Fuzzy Search 'Hello World!' returns TRUE")
-        XCTAssertTrue(FuzzySearch.search(helloWorld, stringToSearch: "Hello"), "Fuzzy Search 'Hello' returns TRUE")
-        XCTAssertTrue(FuzzySearch.search(helloWorld, stringToSearch: "World!"), "Fuzzy Search 'World!' returns TRUE")
-        XCTAssertTrue(FuzzySearch.search(helloWorld, stringToSearch: "ld!"), "Fuzzy Search 'ld!' returns TRUE")
-        XCTAssertTrue(FuzzySearch.search(helloWorld, stringToSearch: "Hell"), "Fuzzy Search 'Hell' returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(helloWorld, stringToSearch: "HELLO"), "Fuzzy Search 'HELLO' returns FALSE")
-        XCTAssertFalse(FuzzySearch.search(helloWorld, stringToSearch: "World?"), "Fuzzy Search 'World?' returns FALSE")
-        XCTAssertFalse(FuzzySearch.search(helloWorld, stringToSearch: "ld?"), "Fuzzy Search 'ld?' returns FALSE")
-        XCTAssertTrue(FuzzySearch.search(helloWorld, stringToSearch: "HELLO", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'HELLO' returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(helloWorld, stringToSearch: "HELLO", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'HELLO' returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: helloWorld, stringToSearch: "Hello World!"), "Fuzzy Search 'Hello World!' returns TRUE")
+        XCTAssertTrue(FuzzySearch.search(originalString: helloWorld, stringToSearch: "Hello"), "Fuzzy Search 'Hello' returns TRUE")
+        XCTAssertTrue(FuzzySearch.search(originalString: helloWorld, stringToSearch: "World!"), "Fuzzy Search 'World!' returns TRUE")
+        XCTAssertTrue(FuzzySearch.search(originalString: helloWorld, stringToSearch: "ld!"), "Fuzzy Search 'ld!' returns TRUE")
+        XCTAssertTrue(FuzzySearch.search(originalString: helloWorld, stringToSearch: "Hell"), "Fuzzy Search 'Hell' returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: helloWorld, stringToSearch: "HELLO"), "Fuzzy Search 'HELLO' returns FALSE")
+        XCTAssertFalse(FuzzySearch.search(originalString: helloWorld, stringToSearch: "World?"), "Fuzzy Search 'World?' returns FALSE")
+        XCTAssertFalse(FuzzySearch.search(originalString: helloWorld, stringToSearch: "ld?"), "Fuzzy Search 'ld?' returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: helloWorld, stringToSearch: "HELLO", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'HELLO' returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: helloWorld, stringToSearch: "HELLO", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'HELLO' returns FALSE")
     }
     
     /*
@@ -71,9 +71,9 @@ class FuzzySearchTest: XCTestCase
     {
         let countMessage = "si s S S s si"
         
-        XCTAssertEqual(FuzzySearch.search(countMessage, stringToSearch: "s"), 4)
-        XCTAssertEqual(FuzzySearch.search(countMessage, stringToSearch: "S"), 2)
-        XCTAssertEqual(FuzzySearch.search(countMessage, stringToSearch: "s", isCaseSensitive: true), 6)
+        XCTAssertEqual(FuzzySearch.search(originalString: countMessage, stringToSearch: "s"), 4)
+        XCTAssertEqual(FuzzySearch.search(originalString: countMessage, stringToSearch: "S"), 2)
+        XCTAssertEqual(FuzzySearch.search(originalString: countMessage, stringToSearch: "s", isCaseSensitive: true), 6)
     }
     
     /*
@@ -85,16 +85,16 @@ class FuzzySearchTest: XCTestCase
         let message:String = "This document specifies an Internet standards track protocol"
         let messageUppercase:String = message.uppercaseString
         
-        XCTAssertTrue(FuzzySearch.search(message, stringToSearch: messageUppercase, isCaseSensitive: true), "Fuzzy Search (Case Sensitive) returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(message, stringToSearch: messageUppercase, isCaseSensitive: false), "Fuzzy Search (Case Sensitive) returns FALSE")
-        XCTAssertTrue(FuzzySearch.search(message, stringToSearch: "DOCUMENT", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'DOCUMENT' returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(message, stringToSearch: "DOCUMENT", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'DOCUMENT' returns FALSE")
-        XCTAssertTrue(FuzzySearch.search(message, stringToSearch: "Rnet Standar", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'Rnet Standar' returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(message, stringToSearch: "Rnet Standar", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'Rnet Standar' returns FALSE")
-        XCTAssertTrue(FuzzySearch.search(message, stringToSearch: "aN", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'aN' returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(message, stringToSearch: "aN", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'aN' returns FALSE")
-        XCTAssertTrue(FuzzySearch.search(message, stringToSearch: "RDS", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'RDS' returns TRUE")
-        XCTAssertFalse(FuzzySearch.search(message, stringToSearch: "RDS", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'RDS' returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: messageUppercase, isCaseSensitive: true), "Fuzzy Search (Case Sensitive) returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: messageUppercase, isCaseSensitive: false), "Fuzzy Search (Case Sensitive) returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: "DOCUMENT", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'DOCUMENT' returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: "DOCUMENT", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'DOCUMENT' returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: "Rnet Standar", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'Rnet Standar' returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: "Rnet Standar", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'Rnet Standar' returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: "aN", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'aN' returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: "aN", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'aN' returns FALSE")
+        XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: "RDS", isCaseSensitive: true), "Fuzzy Search (Case Sensitive) 'RDS' returns TRUE")
+        XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: "RDS", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'RDS' returns FALSE")
     }
     /*
     The testFuzzySearchCount method tests the implementation of the FuzzySearch.search returning a the number of instances within the original String
@@ -103,9 +103,9 @@ class FuzzySearchTest: XCTestCase
     {
         let testMessage:String = "The The And"
         
-        XCTAssertEqual(FuzzySearch.search(testMessage, stringToSearch: "The", isCaseSensitive: true), 2)
-        XCTAssertEqual(FuzzySearch.search(testMessage, stringToSearch: "THE", isCaseSensitive: false), 0)
-        XCTAssertEqual(FuzzySearch.search(testMessage, stringToSearch: "T", isCaseSensitive: false), 2)
+        XCTAssertEqual(FuzzySearch.search(originalString: testMessage, stringToSearch: "The", isCaseSensitive: true), 2)
+        XCTAssertEqual(FuzzySearch.search(originalString: testMessage, stringToSearch: "THE", isCaseSensitive: false), 0)
+        XCTAssertEqual(FuzzySearch.search(originalString: testMessage, stringToSearch: "T", isCaseSensitive: false), 2)
     }
     /*
     The testFuzzySearchArray method tests the implementation of the FuzzySearch.search that returns an Array of Strings that match the character set being searched.
@@ -115,12 +115,12 @@ class FuzzySearchTest: XCTestCase
         let message:String = "This document specifies an Internet standards track protocol aN"
         let messageUppercase:String = message.uppercaseString
         
-        XCTAssertEqual(FuzzySearch.search("", stringToSearch: "", isCaseSensitive: false), [String]())
-        XCTAssertEqual(FuzzySearch.search("", stringToSearch: message, isCaseSensitive: false), [String]())
-        XCTAssertEqual(FuzzySearch.search(message, stringToSearch: "an", isCaseSensitive: true), ["an", "standards", "an"])
-        XCTAssertEqual(FuzzySearch.search(messageUppercase, stringToSearch: "an", isCaseSensitive: false), [String]())
-        XCTAssertEqual(FuzzySearch.search(message, stringToSearch: "aN", isCaseSensitive: true), ["an", "standards", "an"])
-        XCTAssertEqual(FuzzySearch.search(message, stringToSearch: "aN", isCaseSensitive: false), ["aN"])
+        XCTAssertEqual(FuzzySearch.search(originalString: "", stringToSearch: "", isCaseSensitive: false), [String]())
+        XCTAssertEqual(FuzzySearch.search(originalString: "", stringToSearch: message, isCaseSensitive: false), [String]())
+        XCTAssertEqual(FuzzySearch.search(originalString: message, stringToSearch: "an", isCaseSensitive: true), ["an", "standards", "an"])
+        XCTAssertEqual(FuzzySearch.search(originalString: messageUppercase, stringToSearch: "an", isCaseSensitive: false), [String]())
+        XCTAssertEqual(FuzzySearch.search(originalString: message, stringToSearch: "aN", isCaseSensitive: true), ["an", "standards", "an"])
+        XCTAssertEqual(FuzzySearch.search(originalString: message, stringToSearch: "aN", isCaseSensitive: false), ["aN"])
     }
     /*
     The testScore method tests the implementation of the score method returning the approximate matching score comparing to string arguments
