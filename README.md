@@ -41,3 +41,8 @@ By importing the file -> FuzzySearch.swift into your project you be able to exec
     FuzzySearch.search(originalString: message, stringToMatch: "acx") -> 0.0
     FuzzySearch.search(originalString: "hello world", stringToMatch: "hello", fuzzines: 0.5) -> 0.913636363636364
     FuzzySearch.search(originalString: "hello world", stringToMatch: "hello wor1", fuzziness: 0.5) -> 0.608181818181818
+
+License
+------------------------------
+
+*MIT License* --> A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license notice in any copy of the software/source.  There are many variations of this license in use.
