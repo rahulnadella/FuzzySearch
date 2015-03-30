@@ -7,6 +7,8 @@ The FuzzySearch project provides a utility class to find an approximate match fo
 
 #####Version
 >Version 1.0 - Design and Implementation of the FuzzySearch 
+#####Build
+>Build (Current) - iOS 8.2
 
 Usage
 ------------------------------
