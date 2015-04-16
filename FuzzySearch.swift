@@ -34,6 +34,8 @@ pattern approximately.
 
 The FuzzySearch provides an implementation to search and match a pattern approximately
 will return whether the character set is found or not by a Boolean or Integer value.
+
+:version 1.0
 */
 public class FuzzySearch
 {
@@ -41,11 +43,11 @@ public class FuzzySearch
     The FuzzySearch.search method returns a Boolean of TRUE if the stringToSearch for
     is found in the originalString otherwise FALSE. This search is not case sensitive.
     
-    @param originalString
+    :param originalString
             The original contents that is going to be searched
-    @param stringToSearch
+    :param stringToSearch
             The specific contents to search for
-    @return
+    :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
     public class func search<T : Equatable>(#originalString: T, var stringToSearch: T) -> Bool
@@ -57,11 +59,11 @@ public class FuzzySearch
     The FuzzySearch.search method returns the number of timees found (Integer) of the 
     set of characters to be searched within the original character set.
     
-    @param originalString
+    :param originalString
             The original contents that is going to be searched
-    @param stringToSearch
+    :param stringToSearch
             The specific contents to search for
-    @return
+    :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
     public class func search<T : Equatable>(#originalString: T, var stringToSearch: T) -> Int
@@ -74,14 +76,14 @@ public class FuzzySearch
     is found in the originalString otherwise FALSE. This search does search for case sensitive 
     Strings by using a Boolean value to indicate what kind of search to use.
     
-    @param originalString
+    :param originalString
             The original contents that is going to be searched
-    @param stringToSearch
+    :param stringToSearch
             The specific contents to search for
-    @param isCaseSensitive
+    :param isCaseSensitive
             A Boolean value to indicate whether to use case sensitive or case 
             insensitive search parameters
-    @return
+    :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
     public class func search<T : Equatable>(#originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Bool
@@ -103,14 +105,14 @@ public class FuzzySearch
     The FuzzySearch.search method returns the number of instances a specific character 
     set is found with in a String object
     
-    @param originalString
+    :param originalString
             The original contents that is going to be searched
-    @param stringToSearch
+    :param stringToSearch
             The specific contents to search for
-    @param isCaseSensitive
+    :param isCaseSensitive
             A Boolean value to indicate whether to use case sensitive or case
             insensitive search parameters
-    @return
+    :return
             An Integer value of the number of instances a character set matches a String
     */
     public class func search<T : Equatable>(#originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
@@ -192,14 +194,14 @@ public class FuzzySearch
     The FuzzySearch.search method returns the Array of String(s) a specific character
     approximately matches that String object
     
-    @param originalString
+    :param originalString
             The original contents that is going to be searched
-    @param stringToSearch
+    :param stringToSearch
             The specific contents to search for
-    @param isCaseSensitive
+    :param isCaseSensitive
             A Boolean value to indicate whether to use case sensitive or case
             insensitive search parameters
-    @return
+    :return
            The Array of String(s) if any are found otherwise an empty Array of String(s)
     */
 
@@ -277,15 +279,15 @@ public class FuzzySearch
     The design and implementation of this method are based on 
     StringScore_Swift by (Yichi Zhang) and StringScore in Javascript (Joshaven Potter)
     
-    @param originalString
+    :param originalString
             The original contents that is going to be searched
-    @param stringToMatch
+    :param stringToMatch
             The specific contents to search for the approximate match
-    @param fuzziness
+    :param fuzziness
             A Double value to indicate a function of distance between two words, 
             which provides a measure of their similarity. The fuzziness value is
             defaulted to 0.
-    @return The score value of the approximate match between strings. 
+    :return The score value of the approximate match between strings. 
             Score of 0 for no match; up to 1 for perfect.
     
     */

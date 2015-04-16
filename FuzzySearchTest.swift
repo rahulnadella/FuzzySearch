@@ -179,7 +179,7 @@ class FuzzySearchTest: XCTestCase
     */
     func testPerformanceExample()
     {
-        // This is an example of a performance test case.
+        /* This is an example of a performance test case. */
         self.measureBlock()
         {
             /* Test without case sensitive */
