@@ -124,8 +124,8 @@ public class FuzzySearch
         */
         if originalString is String && stringToSearch is String
         {
-            tempOriginalString = originalString as String
-            tempStringToSearch = stringToSearch as String
+            tempOriginalString = originalString as! String
+            tempStringToSearch = stringToSearch as! String
         }
         else
         {
@@ -134,7 +134,7 @@ public class FuzzySearch
         /*
         Either String is empty return false
         */
-        if countElements(tempOriginalString) == 0 || countElements(tempStringToSearch) == 0
+        if count(tempOriginalString) == 0 || count(tempStringToSearch) == 0
         {
             return 0
         }
@@ -142,7 +142,7 @@ public class FuzzySearch
         /*
         stringToSearch is greater than the originalString return false
         */
-        if countElements(tempOriginalString) < countElements(tempStringToSearch)
+        if count(tempOriginalString) < count(tempStringToSearch)
         {
             return 0
         }
@@ -170,7 +170,7 @@ public class FuzzySearch
                     if charOut==charIn
                     {
                         searchIndex++
-                        if searchIndex==countElements(tempStringToSearch)
+                        if searchIndex==count(tempStringToSearch)
                         {
                             searchCount++
                             searchIndex = 0
@@ -210,7 +210,7 @@ public class FuzzySearch
         /*
         Either String is empty return false
         */
-        if countElements(originalString) == 0 || countElements(stringToSearch) == 0
+        if count(originalString) == 0 || count(stringToSearch) == 0
         {
             return [String]()
         }
@@ -218,7 +218,7 @@ public class FuzzySearch
         /*
         stringToSearch is greater than the originalString return false
         */
-        if countElements(originalString) < countElements(stringToSearch)
+        if count(originalString) < count(stringToSearch)
         {
             return [String]()
         }
@@ -248,7 +248,7 @@ public class FuzzySearch
                         if charOut==charIn
                         {
                             searchIndex++
-                            if searchIndex==countElements(stringToSearch)
+                            if searchIndex==count(stringToSearch)
                             {
                                 approximateMatch.append(content)
                                 searchIndex = 0
@@ -303,7 +303,7 @@ public class FuzzySearch
         /*
         the stringToMatch is greater than originalString return score of 0
         */
-        if countElements(originalString) < countElements(stringToMatch)
+        if count(originalString) < count(stringToMatch)
         {
             return 0
         }
@@ -321,9 +321,9 @@ public class FuzzySearch
         var charScore = 0.0
         var finalScore = 0.0
         var lowercaseString = originalString.lowercaseString
-        var strLength = countElements(originalString)
+        var strLength = count(originalString)
         var lowercaseStringToMatch = stringToMatch.lowercaseString
-        var wordLength = countElements(stringToMatch)
+        var wordLength = count(stringToMatch)
         var indexOfString:String.Index!
         var startAt = lowercaseString.startIndex
         var fuzzies = 1.0
