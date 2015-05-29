@@ -13,6 +13,11 @@ The FuzzySearch project provides a utility class to find an approximate match fo
 
 Usage
 ------------------------------
+
+The FuzzySearch uses Cocoapods, the developer will need to add this to their project Podfile:
+
+``pod 'FuzzySearch', '1.1.0'``
+
 By importing the file -> FuzzySearch.swift into your project you be able to execute the methods within your the specific project. Examples are below of the listed functions within the class. Please refer to FuzzySearchTest.swift for examples.
 
 ***Initialization***
