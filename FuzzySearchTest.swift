@@ -134,44 +134,44 @@ class FuzzySearchTest: XCTestCase
         let helloWorld:String = "hello world"
         
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "axl"), 0.0)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "ow"), 0.504545454545455, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "e"), 0.259090909090909, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "he"), 0.622727272727273, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hel"), 0.659090909090909, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hell"), 0.695454545454545, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello"), 0.731818181818182, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl"), 0.913636363636364, 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "ow"), 0.504545454545455, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "e"), 0.259090909090909, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "he"), 0.622727272727273, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hel"), 0.659090909090909, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hell"), 0.695454545454545, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello"), 0.731818181818182, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl"), 0.913636363636364, accuracy: 0.00000001)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello world"), 1.0)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello wor1"), 0.0)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "H"), 0.531818181818182, 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "H"), 0.531818181818182, accuracy: 0.00000001)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "HiMi"), 0.0)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "Hills"), 0.0)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "Hillsd"), 0.0)
         
         let he:String = "He"
         
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: he, stringToMatch: "h"), 0.675, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: he, stringToMatch: "H"), 0.75, 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: he, stringToMatch: "h"), 0.675, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: he, stringToMatch: "H"), 0.75, accuracy: 0.00000001)
         
         let hello:String = "Hello"
         
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hell"), 0.8475, 0.01)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello"), 0.93, 0.01)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello worl"), 0.0, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello world"), 0.0, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello wor1"), 0.0, 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hell"), 0.8475, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello"), 0.93, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello worl"), 0.0, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello world"), 0.0, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello wor1"), 0.0, accuracy: 0.00000001)
 
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl", fuzziness:0.5), 0.913636363636364, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello world", fuzziness:0.5), 1.0, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello wor1", fuzziness:0.5), 0.608181818181818, 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl", fuzziness:0.5), 0.913636363636364, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello world", fuzziness:0.5), 1.0, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello wor1", fuzziness:0.5), 0.608181818181818, accuracy: 0.00000001)
         
         let hillsdaleMichigan:String = "Hillsdale Michigan"
         
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "HiMi", fuzziness:0.5), 0.669444444444444, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hills", fuzziness:0.5), 0.661111111111111, 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hillsd", fuzziness:0.5), 0.683333333333333, 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "HiMi", fuzziness:0.5), 0.669444444444444, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hills", fuzziness:0.5), 0.661111111111111, accuracy: 0.00000001)
+        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hillsd", fuzziness:0.5), 0.683333333333333, accuracy: 0.00000001)
     }
     
     /*

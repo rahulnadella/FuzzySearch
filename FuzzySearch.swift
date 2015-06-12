@@ -50,7 +50,7 @@ public class FuzzySearch
     :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T) -> Bool
+    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T) -> Bool
     {
         return search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
@@ -66,7 +66,7 @@ public class FuzzySearch
     :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T) -> Int
+    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T) -> Int
     {
         return search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
@@ -86,10 +86,10 @@ public class FuzzySearch
     :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Bool
+    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T, isCaseSensitive: Bool) -> Bool
     {
         /* Decipher if the String to be searched for is found */
-        var searchCount:Int = search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: isCaseSensitive)
+        let searchCount:Int = search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: isCaseSensitive)
         
         if searchCount > 0
         {
@@ -115,7 +115,7 @@ public class FuzzySearch
     :return
             An Integer value of the number of instances a character set matches a String
     */
-    public class func search<T : Equatable>(#originalString: T, var stringToSearch: T, isCaseSensitive: Bool) -> Int
+    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T, isCaseSensitive: Bool) -> Int
     {
         var tempOriginalString = String()
         var tempStringToSearch = String()
@@ -134,7 +134,7 @@ public class FuzzySearch
         /*
         Either String is empty return false
         */
-        if count(tempOriginalString) == 0 || count(tempStringToSearch) == 0
+        if tempOriginalString.characters.count == 0 || tempStringToSearch.characters.count == 0
         {
             return 0
         }
@@ -142,7 +142,7 @@ public class FuzzySearch
         /*
         stringToSearch is greater than the originalString return false
         */
-        if count(tempOriginalString) < count(tempStringToSearch)
+        if tempOriginalString.characters.count < tempStringToSearch.characters.count
         {
             return 0
         }
@@ -161,16 +161,14 @@ public class FuzzySearch
         /*
         Search the contents of the originalString to determine if the stringToSearch can be found or not
         */
-        for charOut in tempOriginalString
-        {
-            for (indexIn, charIn) in enumerate(tempStringToSearch)
-            {
+        for charOut in tempOriginalString.characters {
+            for (indexIn, charIn) in tempStringToSearch.characters.enumerate() {
                 if indexIn == searchIndex
                 {
                     if charOut==charIn
                     {
                         searchIndex++
-                        if searchIndex==count(tempStringToSearch)
+                        if searchIndex == tempStringToSearch.characters.count
                         {
                             searchCount++
                             searchIndex = 0
@@ -205,12 +203,12 @@ public class FuzzySearch
            The Array of String(s) if any are found otherwise an empty Array of String(s)
     */
 
-    public class func search(var #originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
+    public class func search(var originalString originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
     {
         /*
         Either String is empty return false
         */
-        if count(originalString) == 0 || count(stringToSearch) == 0
+        if originalString.characters.count == 0 || stringToSearch.characters.count == 0
         {
             return [String]()
         }
@@ -218,7 +216,7 @@ public class FuzzySearch
         /*
         stringToSearch is greater than the originalString return false
         */
-        if count(originalString) < count(stringToSearch)
+        if originalString.characters.count < stringToSearch.characters.count
         {
             return [String]()
         }
@@ -239,16 +237,16 @@ public class FuzzySearch
         */
         for content in originalString.componentsSeparatedByString(" ")
         {
-            for charOut in content
+            for charOut in content.characters
             {
-                for (indexIn, charIn) in enumerate(stringToSearch)
+                for (indexIn, charIn) in stringToSearch.characters.enumerate()
                 {
                     if indexIn == searchIndex
                     {
                         if charOut==charIn
                         {
                             searchIndex++
-                            if searchIndex==count(stringToSearch)
+                            if searchIndex==stringToSearch.characters.count
                             {
                                 approximateMatch.append(content)
                                 searchIndex = 0
@@ -291,7 +289,7 @@ public class FuzzySearch
             Score of 0 for no match; up to 1 for perfect.
     
     */
-    public class func score(#originalString: String, stringToMatch: String, fuzziness: Double? = nil) -> Double
+    public class func score(originalString originalString: String, stringToMatch: String, fuzziness: Double? = nil) -> Double
     {
         /*
         Either String objects are empty return score of 0
@@ -303,7 +301,7 @@ public class FuzzySearch
         /*
         the stringToMatch is greater than originalString return score of 0
         */
-        if count(originalString) < count(stringToMatch)
+        if originalString.characters.count < stringToMatch.characters.count
         {
             return 0
         }
@@ -321,9 +319,9 @@ public class FuzzySearch
         var charScore = 0.0
         var finalScore = 0.0
         var lowercaseString = originalString.lowercaseString
-        var strLength = count(originalString)
+        let strLength = originalString.characters.count
         var lowercaseStringToMatch = stringToMatch.lowercaseString
-        var wordLength = count(stringToMatch)
+        let wordLength = stringToMatch.characters.count
         var indexOfString:String.Index!
         var startAt = lowercaseString.startIndex
         var fuzzies = 1.0
@@ -343,9 +341,10 @@ public class FuzzySearch
             Find next first case-insensitive match of word's i-th character.
             The search in "string" begins at "startAt".
             */
+
             if let range = lowercaseString.rangeOfString(
                 String(lowercaseStringToMatch[advance(lowercaseStringToMatch.startIndex, i)] as Character),
-                options: nil,
+                options: NSStringCompareOptions.CaseInsensitiveSearch,
                 range: Range<String.Index>( start: startAt, end: lowercaseString.endIndex),
                 locale: nil
                 )
