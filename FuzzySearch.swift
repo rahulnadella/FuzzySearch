@@ -318,9 +318,9 @@ public class FuzzySearch
         var runningScore = 0.0
         var charScore = 0.0
         var finalScore = 0.0
-        var lowercaseString = originalString.lowercaseString
+        let lowercaseString = originalString.lowercaseString
         let strLength = originalString.characters.count
-        var lowercaseStringToMatch = stringToMatch.lowercaseString
+        let lowercaseStringToMatch = stringToMatch.lowercaseString
         let wordLength = stringToMatch.characters.count
         var indexOfString:String.Index!
         var startAt = lowercaseString.startIndex
