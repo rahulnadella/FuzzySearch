@@ -343,7 +343,7 @@ public class FuzzySearch
             */
 
             if let range = lowercaseString.rangeOfString(
-                String(lowercaseStringToMatch[advance(lowercaseStringToMatch.startIndex, i)] as Character),
+                String(lowercaseStringToMatch[lowercaseStringToMatch.startIndex.advancedBy(i)] as Character),
                 options: NSStringCompareOptions.CaseInsensitiveSearch,
                 range: Range<String.Index>( start: startAt, end: lowercaseString.endIndex),
                 locale: nil
@@ -364,7 +364,7 @@ public class FuzzySearch
                         Weighing Logic: Typing the first character of an acronym is as if you
                         preceded it with two perfect character matches.
                         */
-                        if originalString[advance(indexOfString, -1)] == " " { charScore += 0.8 }
+                        if originalString[indexOfString.advancedBy(-1)] == " " { charScore += 0.8 }
                     }
             }
             else
@@ -383,14 +383,14 @@ public class FuzzySearch
             }
             
             /* Same case bonus. */
-            if (originalString[indexOfString] == stringToMatch[advance(stringToMatch.startIndex, i)])
+            if (originalString[indexOfString] == stringToMatch[stringToMatch.startIndex.advancedBy(i)])
             {
                 charScore += 0.1
             }
             
             /* Update scores and startAt position for next round of indexOf */
             runningScore += charScore
-            startAt = advance(indexOfString, 1)
+            startAt = indexOfString.advancedBy(1)
         }
         
         /* Reduce penalty for longer strings. */
