@@ -15,7 +15,7 @@ The FuzzySearch project provides a utility class to find an approximate match fo
 Usage
 ------------------------------
 
-The FuzzySearch uses Cocoapods, the developer will need to add this to their project Podfile:
+The FuzzySearch uses CocoaPods, the developer will need to add this to their project Podfile:
 
 ``pod 'FuzzySearch', '1.1.0'``
 
