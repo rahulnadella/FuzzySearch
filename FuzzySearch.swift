@@ -37,7 +37,7 @@ will return whether the character set is found or not by a Boolean or Integer va
 
 :version 1.0
 */
-public class FuzzySearch
+open class FuzzySearch
 {
     /*
     The FuzzySearch.search method returns a Boolean of TRUE if the stringToSearch for
@@ -50,7 +50,7 @@ public class FuzzySearch
     :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T) -> Bool
+    open class func search<T : Equatable>(originalString: T, stringToSearch: T) -> Bool
     {
         return search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
@@ -66,7 +66,7 @@ public class FuzzySearch
     :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T) -> Int
+    open class func search<T : Equatable>(originalString: T, stringToSearch: T) -> Int
     {
         return search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: false)
     }
@@ -86,7 +86,7 @@ public class FuzzySearch
     :return
             A Boolean of TRUE if found otherwise FALSE for not found
     */
-    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T, isCaseSensitive: Bool) -> Bool
+    open class func search<T : Equatable>(originalString: T, stringToSearch: T, isCaseSensitive: Bool) -> Bool
     {
         /* Decipher if the String to be searched for is found */
         let searchCount:Int = search(originalString: originalString, stringToSearch: stringToSearch, isCaseSensitive: isCaseSensitive)
@@ -115,7 +115,7 @@ public class FuzzySearch
     :return
             An Integer value of the number of instances a character set matches a String
     */
-    public class func search<T : Equatable>(originalString originalString: T, stringToSearch: T, isCaseSensitive: Bool) -> Int
+    open class func search<T : Equatable>(originalString: T, stringToSearch: T, isCaseSensitive: Bool) -> Int
     {
         var tempOriginalString = String()
         var tempStringToSearch = String()
@@ -152,8 +152,8 @@ public class FuzzySearch
         */
         if isCaseSensitive
         {
-            tempOriginalString = tempOriginalString.lowercaseString
-            tempStringToSearch = tempStringToSearch.lowercaseString
+            tempOriginalString = tempOriginalString.lowercased()
+            tempStringToSearch = tempStringToSearch.lowercased()
         }
         
         var searchIndex : Int = 0
@@ -162,15 +162,15 @@ public class FuzzySearch
         Search the contents of the originalString to determine if the stringToSearch can be found or not
         */
         for charOut in tempOriginalString.characters {
-            for (indexIn, charIn) in tempStringToSearch.characters.enumerate() {
+            for (indexIn, charIn) in tempStringToSearch.characters.enumerated() {
                 if indexIn == searchIndex
                 {
                     if charOut==charIn
                     {
-                        searchIndex++
+                        searchIndex += 1
                         if searchIndex == tempStringToSearch.characters.count
                         {
-                            searchCount++
+                            searchCount += 1
                             searchIndex = 0
                         }
                         else
@@ -203,8 +203,9 @@ public class FuzzySearch
            The Array of String(s) if any are found otherwise an empty Array of String(s)
     */
 
-    public class func search(var originalString originalString: String, var stringToSearch: String, isCaseSensitive: Bool) -> [String]
+    public class func search(originalString: String, stringToSearch: String, isCaseSensitive: Bool) -> [String]
     {
+        var originalString = originalString, stringToSearch = stringToSearch
         /*
         Either String is empty return false
         */
@@ -226,8 +227,8 @@ public class FuzzySearch
         */
         if isCaseSensitive
         {
-            originalString = originalString.lowercaseString
-            stringToSearch = stringToSearch.lowercaseString
+            originalString = originalString.lowercased()
+            stringToSearch = stringToSearch.lowercased()
         }
         
         var searchIndex : Int = 0
@@ -235,17 +236,17 @@ public class FuzzySearch
         /*
         Search the contents of the originalString to determine if the stringToSearch can be found or not
         */
-        for content in originalString.componentsSeparatedByString(" ")
+        for content in originalString.components(separatedBy: " ")
         {
             for charOut in content.characters
             {
-                for (indexIn, charIn) in stringToSearch.characters.enumerate()
+                for (indexIn, charIn) in stringToSearch.characters.enumerated()
                 {
                     if indexIn == searchIndex
                     {
                         if charOut==charIn
                         {
-                            searchIndex++
+                            searchIndex += 1
                             if searchIndex==stringToSearch.characters.count
                             {
                                 approximateMatch.append(content)
@@ -289,7 +290,7 @@ public class FuzzySearch
             Score of 0 for no match; up to 1 for perfect.
     
     */
-    public class func score(originalString originalString: String, stringToMatch: String, fuzziness: Double? = nil) -> Double
+    open class func score(originalString: String, stringToMatch: String, fuzziness: Double? = nil) -> Double
     {
         /*
         Either String objects are empty return score of 0
@@ -318,9 +319,9 @@ public class FuzzySearch
         var runningScore = 0.0
         var charScore = 0.0
         var finalScore = 0.0
-        let lowercaseString = originalString.lowercaseString
+        let lowercaseString = originalString.lowercased()
         let strLength = originalString.characters.count
-        let lowercaseStringToMatch = stringToMatch.lowercaseString
+        let lowercaseStringToMatch = stringToMatch.lowercased()
         let wordLength = stringToMatch.characters.count
         var indexOfString:String.Index!
         var startAt = lowercaseString.startIndex
@@ -342,15 +343,15 @@ public class FuzzySearch
             The search in "string" begins at "startAt".
             */
 
-            if let range = lowercaseString.rangeOfString(
-                String(lowercaseStringToMatch[lowercaseStringToMatch.startIndex.advancedBy(i)] as Character),
-                options: NSStringCompareOptions.CaseInsensitiveSearch,
-                range: Range<String.Index>( start: startAt, end: lowercaseString.endIndex),
+            if let range = lowercaseString.range(
+                of: String(lowercaseStringToMatch[lowercaseStringToMatch.characters.index(lowercaseStringToMatch.startIndex, offsetBy: i)] as Character),
+                options: NSString.CompareOptions.caseInsensitive,
+                range: (startAt ..< lowercaseString.endIndex),
                 locale: nil
                 )
             {
                     /* start index of word's i-th character in string. */
-                    indexOfString = range.startIndex
+                    indexOfString = range.lowerBound
                     if startAt == indexOfString
                     {
                         /* Consecutive letter & start-of-string Bonus */
@@ -364,7 +365,7 @@ public class FuzzySearch
                         Weighing Logic: Typing the first character of an acronym is as if you
                         preceded it with two perfect character matches.
                         */
-                        if originalString[indexOfString.advancedBy(-1)] == " " { charScore += 0.8 }
+                        if originalString[lowercaseString.index(indexOfString, offsetBy: -1)] == " " { charScore += 0.8 }
                     }
             }
             else
@@ -383,14 +384,14 @@ public class FuzzySearch
             }
             
             /* Same case bonus. */
-            if (originalString[indexOfString] == stringToMatch[stringToMatch.startIndex.advancedBy(i)])
+            if (originalString[indexOfString] == stringToMatch[stringToMatch.characters.index(stringToMatch.startIndex, offsetBy: i)])
             {
                 charScore += 0.1
             }
             
             /* Update scores and startAt position for next round of indexOf */
             runningScore += charScore
-            startAt = indexOfString.advancedBy(1)
+            startAt = lowercaseString.index(indexOfString, offsetBy: 1)
         }
         
         /* Reduce penalty for longer strings. */
