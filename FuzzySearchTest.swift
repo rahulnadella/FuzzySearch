@@ -87,7 +87,7 @@ class FuzzySearchTest: XCTestCase
     func testFuzzySearchWithCaseSensitive()
     {
         let message:String = "This document specifies an Internet standards track protocol"
-        let messageUppercase:String = message.uppercaseString
+        let messageUppercase:String = message.uppercased()
         
         XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: messageUppercase, isCaseSensitive: true), "Fuzzy Search (Case Sensitive) returns TRUE")
         XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: messageUppercase, isCaseSensitive: false), "Fuzzy Search (Case Sensitive) returns FALSE")
@@ -117,7 +117,7 @@ class FuzzySearchTest: XCTestCase
     func testFuzzySearchArray()
     {
         let message:String = "This document specifies an Internet standards track protocol aN"
-        let messageUppercase:String = message.uppercaseString
+        let messageUppercase:String = message.uppercased()
         
         XCTAssertEqual(FuzzySearch.search(originalString: "", stringToSearch: "", isCaseSensitive: false), [String]())
         XCTAssertEqual(FuzzySearch.search(originalString: "", stringToSearch: message, isCaseSensitive: false), [String]())
@@ -180,7 +180,7 @@ class FuzzySearchTest: XCTestCase
     func testPerformanceExample()
     {
         /* This is an example of a performance test case. */
-        self.measureBlock()
+        self.measure()
         {
             /* Test without case sensitive */
             self.testFuzzySearch()
